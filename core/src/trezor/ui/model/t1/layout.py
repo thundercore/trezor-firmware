@@ -124,17 +124,6 @@ def show_address(
     return Confirm(text, confirm="CONTINUE", cancel=cancel)
 
 
-def confirm_wipe() -> Confirm:
-    text = Text(new_lines=False)
-    text.bold("Do you want to wipe")
-    text.br()
-    text.bold("the device?")
-    text.br()
-    text.br_half()
-    text.normal("All data will be lost.")
-    return Confirm(text, confirm="WIPE DEVICE", cancel="CANCEL")
-
-
 # FIXME: needs to be one pageable layout containing all layouts
 def confirm_output(
     output_address: str = None,
