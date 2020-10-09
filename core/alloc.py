@@ -33,7 +33,8 @@ def cli(ctx, alloc_data, type):
 @cli.command()
 @click.pass_obj
 @click.argument("filename")
-def annotate(obj, filename):
+@click.option("-c", "--calls", is_flag=True, help="include times called as first value")
+def annotate(obj, filename, calls):
     if obj.type == "total":
         alloc_str = lambda line: str(line["total_allocs"])
     else:
@@ -46,11 +47,19 @@ def annotate(obj, filename):
     linedata = {lineno: alloc_str(line) for lineno, line in filedata.items()}
     maxlen = max(len(l) for l in linedata.values())
 
+    call_nos = {lineno: str(line["total_calls"]) for lineno, line in filedata.items()}
+    max_call = max(len(l) for l in call_nos.values())
+
     lineno = 0
     for line in open("src/" + filename):
         lineno += 1
         linecount = linedata.get(lineno, "")
-        print(f"{linecount:>{maxlen}}  {line}", end="")
+        callcount = call_nos.get(lineno, "")
+        if calls:
+            callcount_str = f"{callcount:{max_call}} "
+        else:
+            callcount_str = ""
+        print(f"{callcount_str}{linecount:{maxlen}}  {line}", end="")
 
 
 @cli.command()
