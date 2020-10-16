@@ -91,10 +91,10 @@ class Bitcoin:
         self.wallet_path = WalletPathChecker()
 
         # set of indices of inputs which are segwit
-        self.segwit = set()  # type: Set[int]
+        self.segwit: Set[int] = set()
 
         # set of indices of inputs which are external
-        self.external = set()  # type: Set[int]
+        self.external: Set[int] = set()
 
         # transaction and signature serialization
         self.serialized_tx = writers.empty_bytearray(_MAX_SERIALIZED_CHUNK_SIZE)
@@ -111,7 +111,7 @@ class Bitcoin:
         # h_inputs is a digest of the inputs streamed for approval in Step 1, which
         # is used to ensure that the inputs streamed for verification in Step 3 are
         # the same as those in Step 1.
-        self.h_inputs = None  # type: Optional[bytes]
+        self.h_inputs: Optional[bytes] = None
 
         # BIP-0143 transaction hashing
         self.init_hash143()

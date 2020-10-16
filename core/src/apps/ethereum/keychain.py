@@ -16,7 +16,7 @@ if False:
     from apps.common.keychain import MsgOut, Handler, HandlerWithKeychain
 
     class MsgWithAddressN(MessageType, Protocol):
-        address_n = ...  # type: List[int]
+        address_n: List[int] = ...
 
 
 async def from_address_n(ctx: wire.Context, address_n: List[int]) -> seed.Keychain:

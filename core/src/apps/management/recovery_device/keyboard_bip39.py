@@ -114,7 +114,7 @@ class Bip39Keyboard(ui.Layout):
                 ("abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz")
             )
         ]
-        self.pending_button = None  # type: Optional[Button]
+        self.pending_button: Optional[Button] = None
         self.pending_index = 0
 
     def dispatch(self, event: int, x: int, y: int) -> None:
