@@ -30,14 +30,15 @@ def confirm_action(
     verb: Union[str, bytes] = Confirm.DEFAULT_CONFIRM,
     icon: str = None,
     br_code: EnumTypeButtonRequestType = ButtonRequestType.Other,
-    # style: Set[str] = {},  # major? hold?
+    **kwargs,
 ) -> Awaitable:
     text = Text(title, icon if icon is not None else ui.ICON_CONFIRM, new_lines=False)
     if action:
         for line in action:
             text.bold(line)
             text.br()
-        text.br_half()
+        if not kwargs.get('compact', False):
+            text.br_half()
     if description:
         for line in description:
             text.normal(line)
@@ -204,7 +205,7 @@ async def show_address(
                 _show_qr(
                     address if address_qr is None else address_qr,
                     desc,
-                    cancel="Address" if is_multisig else "XPUBs",
+                    cancel="XPUBs" if is_multisig else "Address",
                 ),
                 "show_qr",
             )

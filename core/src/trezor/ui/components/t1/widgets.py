@@ -25,13 +25,15 @@ def confirm_action(
     verb: Union[str, bytes] = "CONFIRM",
     icon: str = None,
     br_code: EnumTypeButtonRequestType = ButtonRequestType.Other,
+    **kwargs,
 ) -> Awaitable:
     text = Text(title.upper(), new_lines=False)
     if action:
         for line in action:
             text.bold(line)
             text.br()
-        text.br_half()
+        if not kwargs.get('compact', False):
+            text.br_half()
     if description:
         for line in description:
             text.normal(line)
