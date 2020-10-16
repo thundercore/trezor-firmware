@@ -215,7 +215,7 @@ def load_message(
         raise ValueError  # experimental messages not enabled
 
     # we need to avoid calling __init__, which enforces required arguments
-    msg = object.__new__(msg_type)  # type: LoadedMessageType
+    msg: LoadedMessageType = object.__new__(msg_type)
     # pre-seed the object with defaults
     for fname, _, fdefault in fields.values():
         if fdefault is FLAG_REPEATED:
@@ -225,7 +225,7 @@ def load_message(
     if False:
         SingularValue = Union[int, bool, bytearray, str, MessageType]
         Value = Union[SingularValue, List[SingularValue]]
-        fvalue = 0  # type: Value
+        fvalue: Value = 0
 
     while True:
         try:

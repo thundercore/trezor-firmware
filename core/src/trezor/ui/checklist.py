@@ -17,7 +17,7 @@ class Checklist(ui.Component):
     def __init__(self, title: str, icon: str) -> None:
         self.title = title
         self.icon = icon
-        self.items = []  # type: List[ChecklistItem]
+        self.items: List[ChecklistItem] = []
         self.active = 0
         self.repaint = True
 
