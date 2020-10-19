@@ -15,7 +15,7 @@ if False:
     from .authorization import CoinJoinAuthorization
 
     class MsgWithCoinName(Protocol):
-        coin_name: str = ...
+        coin_name: str
 
     MsgIn = TypeVar("MsgIn", bound=MsgWithCoinName)
     HandlerWithCoinInfo = Callable[..., Awaitable[MsgOut]]
